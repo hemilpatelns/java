@@ -33,7 +33,12 @@ class Logic {
         boolean oNine = s[8].equalsIgnoreCase("o");
 
         if ((xOne && xTwo && xThree) || (xOne && xFour && xSeven) || (xOne && xFive && xNine) || (xTwo && xFive && xEight) || (xThree && xFive && xSeven) || (xThree && xSix && xNine) || (xFour && xFive && xSix) || (xSeven && xEight && xNine) || (oOne && oTwo && oThree) || (oOne && oFour && oSeven) || (oOne && oFive && oNine) || (oTwo && oFive && oEight) || (oThree && oFive && oSeven) || (oThree && oSix && oNine) || (oFour && oFive && oSix) || (oSeven && oEight && oNine)) {
-
+            for (int i = 0; i < s.length; i++) {
+                System.out.print(s[i] + " ");
+                if (i == 2 || i == 5) {
+                    System.out.println();
+                }
+            }
             if ((xOne && xTwo && xThree) || (xOne && xFour && xSeven) || (xOne && xFive && xNine) || (xTwo && xFive && xEight) || (xThree && xFive && xSeven) || (xThree && xSix && xNine) || (xFour && xFive && xSix) || (xSeven && xEight && xNine)) {
                 System.out.println("\nPlayer 1 Wins!");
             } else {
@@ -54,30 +59,31 @@ public class TicTacToe {
         int playerTwoTurns = 0;
         String[] s = {"-", "-", "-", "-", "-", "-", "-", "-", "-"};
         int position;
-        for (int i = 0; i < s.length; i++) {
-            System.out.print(s[i] + " ");
-            if (i == 2 || i == 5) {
-                System.out.println();
-            }
-        }
+
         while (logic.flag) {
 
             if (playerOneTurns == playerTwoTurns) {
+                for (int i = 0; i < s.length; i++) {
+                    System.out.print(s[i] + " ");
+                    if (i == 2 || i == 5) {
+                        System.out.println();
+                    }
+                }
                 System.out.println("\nPlayer 1's turn");
                 System.out.println("Choose the position you want to put your mark: ");
 
-                position = sc.nextInt();
-                if (s[position - 1].equalsIgnoreCase("-")) {
-                    s[position - 1] = "x";
-                    playerOneTurns++;
-                    for (int i = 0; i < s.length; i++) {
-                        System.out.print(s[i] + " ");
-                        if (i == 2 || i == 5) {
-                            System.out.println();
-                        }
+                try {
+                    position = sc.nextInt();
+
+                    if (s[position - 1].equalsIgnoreCase("-")) {
+                        s[position - 1] = "x";
+                        playerOneTurns++;
+
+                    } else {
+                        System.out.println("Your opponent already occupies this position. Please choose again!");
                     }
-                } else {
-                    System.out.println("Invalid position. Please try again!");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Choose positions between 1-9 only");
                 }
 
             }
@@ -89,22 +95,26 @@ public class TicTacToe {
             }
 
             if (playerTwoTurns < playerOneTurns) {
+                for (int i = 0; i < s.length; i++) {
+                    System.out.print(s[i] + " ");
+                    if (i == 2 || i == 5) {
+                        System.out.println();
+                    }
+                }
 
                 System.out.println("\nPlayer 2's turn");
                 System.out.println("Choose the position you want to put your mark: ");
+                try {
+                    position = sc.nextInt();
+                    if (s[position - 1].equalsIgnoreCase("-")) {
+                        s[position - 1] = "o";
+                        playerTwoTurns++;
 
-                position = sc.nextInt();
-                if (s[position - 1].equalsIgnoreCase("-")) {
-                    s[position - 1] = "o";
-                    playerTwoTurns++;
-                    for (int i = 0; i < s.length; i++) {
-                        System.out.print(s[i] + " ");
-                        if (i == 2 || i == 5) {
-                            System.out.println();
-                        }
+                    } else {
+                        System.out.println("Your opponent already occupies this position. Please choose again!");
                     }
-                } else {
-                    System.out.println("Invalid position. Please try again!");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Choose positions between 1-9 only");
                 }
             }
 
