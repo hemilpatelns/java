@@ -1,12 +1,13 @@
 package miniproject;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Logic {
 
     boolean flag = true;
 
-    public Scanner getScanner() {
+    public static Scanner getScanner() {
         return new Scanner(System.in);
     }
 
@@ -54,7 +55,7 @@ class Logic {
 public class TicTacToe {
     public static void main(String[] args) {
         Logic logic = new Logic();
-        Scanner sc = logic.getScanner();
+        Scanner sc = Logic.getScanner();
         int playerOneTurns = 0;
         int playerTwoTurns = 0;
         String[] s = {"-", "-", "-", "-", "-", "-", "-", "-", "-"};
@@ -84,6 +85,9 @@ public class TicTacToe {
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Choose positions between 1-9 only");
+                } catch (InputMismatchException i) {
+                    System.out.println("Only numbers allowed");
+                    sc.next();
                 }
 
             }
@@ -115,6 +119,9 @@ public class TicTacToe {
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Choose positions between 1-9 only");
+                } catch (InputMismatchException i) {
+                    System.out.println("Only numbers allowed");
+                    sc.next();
                 }
             }
 
